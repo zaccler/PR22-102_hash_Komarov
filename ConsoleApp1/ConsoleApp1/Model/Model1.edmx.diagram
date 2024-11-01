@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="88e19194ca7842b58e761a09024c85fa" Name="Diagram1">
+        <EntityTypeShape EntityType="construction_organizationModel.AdditionalServices" Width="1.5" PointX="8.25" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="construction_organizationModel.Clients" Width="1.5" PointX="3" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="construction_organizationModel.Employees" Width="1.5" PointX="3" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="construction_organizationModel.Equipment" Width="1.5" PointX="5.25" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="construction_organizationModel.EquipmentUsage" Width="1.5" PointX="7.5" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="construction_organizationModel.Invoices" Width="1.5" PointX="7.5" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="construction_organizationModel.Logins" Width="1.5" PointX="0.75" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="construction_organizationModel.MaterialDeliveries" Width="1.5" PointX="10.5" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="construction_organizationModel.Materials" Width="1.5" PointX="8.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="construction_organizationModel.Orders" Width="1.5" PointX="5.25" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="construction_organizationModel.OrderServices" Width="1.5" PointX="10.5" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="construction_organizationModel.ProjectStages" Width="1.5" PointX="7.5" PointY="20.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="construction_organizationModel.ProjectSubcontractors" Width="1.5" PointX="9.75" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="construction_organizationModel.QualityControl" Width="1.5" PointX="9.75" PointY="23.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="construction_organizationModel.Reports" Width="1.5" PointX="7.5" PointY="24" IsExpanded="true" />
+        <EntityTypeShape EntityType="construction_organizationModel.Subcontractors" Width="1.5" PointX="7.5" PointY="30.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="construction_organizationModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="construction_organizationModel.Taxes" Width="1.5" PointX="7.5" PointY="27" IsExpanded="true" />
+        <AssociationConnector Association="construction_organizationModel.FK__OrderServ__Servi__45BE5BA9" ManuallyRouted="false" />
+        <AssociationConnector Association="construction_organizationModel.FK__Orders__ClientID__367C1819" ManuallyRouted="false" />
+        <AssociationConnector Association="construction_organizationModel.FK__Employees__Login__339FAB6E" ManuallyRouted="false" />
+        <AssociationConnector Association="construction_organizationModel.FK__Orders__Employee__37703C52" ManuallyRouted="false" />
+        <AssociationConnector Association="construction_organizationModel.FK__Equipment__Equip__5BAD9CC8" ManuallyRouted="false" />
+        <AssociationConnector Association="construction_organizationModel.FK_EquipmentUsage_Orders" ManuallyRouted="false" />
+        <AssociationConnector Association="construction_organizationModel.FK__Invoices__OrderI__4B7734FF" ManuallyRouted="false" />
+        <AssociationConnector Association="construction_organizationModel.FK__MaterialD__Mater__40058253" ManuallyRouted="false" />
+        <AssociationConnector Association="construction_organizationModel.FK__MaterialD__Order__3F115E1A" ManuallyRouted="false" />
+        <AssociationConnector Association="construction_organizationModel.FK__OrderServ__Order__44CA3770" ManuallyRouted="false" />
+        <AssociationConnector Association="construction_organizationModel.FK__ProjectSt__Order__3A4CA8FD" ManuallyRouted="false" />
+        <AssociationConnector Association="construction_organizationModel.FK__Reports__OrderID__489AC854" ManuallyRouted="false" />
+        <AssociationConnector Association="construction_organizationModel.FK__Taxes__OrderID__56E8E7AB" ManuallyRouted="false" />
+        <AssociationConnector Association="construction_organizationModel.FK__ProjectSu__Stage__531856C7" ManuallyRouted="false" />
+        <AssociationConnector Association="construction_organizationModel.FK__QualityCo__Stage__4E53A1AA" ManuallyRouted="false" />
+        <AssociationConnector Association="construction_organizationModel.FK__ProjectSu__Subco__540C7B00" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

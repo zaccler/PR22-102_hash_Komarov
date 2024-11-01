@@ -1,0 +1,487 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="construction_organizationModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AdditionalServices">
+    <Key>
+      <PropertyRef Name="ServiceID" />
+    </Key>
+    <Property Name="ServiceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ServiceName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="Decimal" Precision="10" Scale="2" />
+    <NavigationProperty Name="OrderServices" Relationship="Self.FK__OrderServ__Servi__45BE5BA9" FromRole="AdditionalServices" ToRole="OrderServices" />
+  </EntityType>
+  <EntityType Name="Clients">
+    <Key>
+      <PropertyRef Name="ClientID" />
+    </Key>
+    <Property Name="ClientID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ClientName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ContactInfo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__ClientID__367C1819" FromRole="Clients" ToRole="Orders" />
+  </EntityType>
+  <EntityType Name="Employees">
+    <Key>
+      <PropertyRef Name="EmployeesID" />
+    </Key>
+    <Property Name="EmployeesID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LoginID" Type="Int32" Nullable="false" />
+    <Property Name="EmployeeName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Position" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ContactInfo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Logins" Relationship="Self.FK__Employees__Login__339FAB6E" FromRole="Employees" ToRole="Logins" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__Employee__37703C52" FromRole="Employees" ToRole="Orders" />
+  </EntityType>
+  <EntityType Name="Equipment">
+    <Key>
+      <PropertyRef Name="EquipmentID" />
+    </Key>
+    <Property Name="EquipmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EquipmentName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="RentalCost" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+    <NavigationProperty Name="EquipmentUsage" Relationship="Self.FK__Equipment__Equip__5BAD9CC8" FromRole="Equipment" ToRole="EquipmentUsage" />
+  </EntityType>
+  <EntityType Name="EquipmentUsage">
+    <Key>
+      <PropertyRef Name="UsageID" />
+    </Key>
+    <Property Name="UsageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StageID" Type="Int32" Nullable="false" />
+    <Property Name="EquipmentID" Type="Int32" Nullable="false" />
+    <Property Name="UsageDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="HoursUsed" Type="Double" Nullable="false" />
+    <Property Name="OrdersID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Equipment" Relationship="Self.FK__Equipment__Equip__5BAD9CC8" FromRole="EquipmentUsage" ToRole="Equipment" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK_EquipmentUsage_Orders" FromRole="EquipmentUsage" ToRole="Orders" />
+  </EntityType>
+  <EntityType Name="Invoices">
+    <Key>
+      <PropertyRef Name="InvoiceID" />
+    </Key>
+    <Property Name="InvoiceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrderID" Type="Int32" Nullable="false" />
+    <Property Name="Amount" Type="Decimal" Precision="15" Scale="2" Nullable="false" />
+    <Property Name="InvoiceDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="DueDate" Type="DateTime" Precision="0" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK__Invoices__OrderI__4B7734FF" FromRole="Invoices" ToRole="Orders" />
+  </EntityType>
+  <EntityType Name="Logins">
+    <Key>
+      <PropertyRef Name="LoginID" />
+    </Key>
+    <Property Name="LoginID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Employees" Relationship="Self.FK__Employees__Login__339FAB6E" FromRole="Logins" ToRole="Employees" />
+  </EntityType>
+  <EntityType Name="MaterialDeliveries">
+    <Key>
+      <PropertyRef Name="DeliveryID" />
+    </Key>
+    <Property Name="DeliveryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrderID" Type="Int32" Nullable="false" />
+    <Property Name="MaterialID" Type="Int32" Nullable="false" />
+    <Property Name="Quantity" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="DeliveryDate" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="Materials" Relationship="Self.FK__MaterialD__Mater__40058253" FromRole="MaterialDeliveries" ToRole="Materials" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK__MaterialD__Order__3F115E1A" FromRole="MaterialDeliveries" ToRole="Orders" />
+  </EntityType>
+  <EntityType Name="Materials">
+    <Key>
+      <PropertyRef Name="MaterialID" />
+    </Key>
+    <Property Name="MaterialID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MaterialName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Unit" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+    <NavigationProperty Name="MaterialDeliveries" Relationship="Self.FK__MaterialD__Mater__40058253" FromRole="Materials" ToRole="MaterialDeliveries" />
+  </EntityType>
+  <EntityType Name="Orders">
+    <Key>
+      <PropertyRef Name="OrderID" />
+    </Key>
+    <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmployeesID" Type="Int32" Nullable="false" />
+    <Property Name="ClientID" Type="Int32" Nullable="false" />
+    <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Clients" Relationship="Self.FK__Orders__ClientID__367C1819" FromRole="Orders" ToRole="Clients" />
+    <NavigationProperty Name="Employees" Relationship="Self.FK__Orders__Employee__37703C52" FromRole="Orders" ToRole="Employees" />
+    <NavigationProperty Name="EquipmentUsage" Relationship="Self.FK_EquipmentUsage_Orders" FromRole="Orders" ToRole="EquipmentUsage" />
+    <NavigationProperty Name="Invoices" Relationship="Self.FK__Invoices__OrderI__4B7734FF" FromRole="Orders" ToRole="Invoices" />
+    <NavigationProperty Name="MaterialDeliveries" Relationship="Self.FK__MaterialD__Order__3F115E1A" FromRole="Orders" ToRole="MaterialDeliveries" />
+    <NavigationProperty Name="OrderServices" Relationship="Self.FK__OrderServ__Order__44CA3770" FromRole="Orders" ToRole="OrderServices" />
+    <NavigationProperty Name="ProjectStages" Relationship="Self.FK__ProjectSt__Order__3A4CA8FD" FromRole="Orders" ToRole="ProjectStages" />
+    <NavigationProperty Name="Reports" Relationship="Self.FK__Reports__OrderID__489AC854" FromRole="Orders" ToRole="Reports" />
+    <NavigationProperty Name="Taxes" Relationship="Self.FK__Taxes__OrderID__56E8E7AB" FromRole="Orders" ToRole="Taxes" />
+  </EntityType>
+  <EntityType Name="OrderServices">
+    <Key>
+      <PropertyRef Name="OrderServiceID" />
+    </Key>
+    <Property Name="OrderServiceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrderID" Type="Int32" Nullable="false" />
+    <Property Name="ServiceID" Type="Int32" Nullable="false" />
+    <Property Name="ServiceDate" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="AdditionalServices" Relationship="Self.FK__OrderServ__Servi__45BE5BA9" FromRole="OrderServices" ToRole="AdditionalServices" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK__OrderServ__Order__44CA3770" FromRole="OrderServices" ToRole="Orders" />
+  </EntityType>
+  <EntityType Name="ProjectStages">
+    <Key>
+      <PropertyRef Name="StageID" />
+    </Key>
+    <Property Name="StageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrderID" Type="Int32" Nullable="false" />
+    <Property Name="StageName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="StartDate" Type="DateTime" Precision="0" />
+    <Property Name="EndDate" Type="DateTime" Precision="0" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK__ProjectSt__Order__3A4CA8FD" FromRole="ProjectStages" ToRole="Orders" />
+    <NavigationProperty Name="ProjectSubcontractors" Relationship="Self.FK__ProjectSu__Stage__531856C7" FromRole="ProjectStages" ToRole="ProjectSubcontractors" />
+    <NavigationProperty Name="QualityControl" Relationship="Self.FK__QualityCo__Stage__4E53A1AA" FromRole="ProjectStages" ToRole="QualityControl" />
+  </EntityType>
+  <EntityType Name="ProjectSubcontractors">
+    <Key>
+      <PropertyRef Name="ProjectSubID" />
+    </Key>
+    <Property Name="ProjectSubID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StageID" Type="Int32" Nullable="false" />
+    <Property Name="SubcontractorID" Type="Int32" Nullable="false" />
+    <Property Name="AssignmentDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="TaskDescription" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ProjectStages" Relationship="Self.FK__ProjectSu__Stage__531856C7" FromRole="ProjectSubcontractors" ToRole="ProjectStages" />
+    <NavigationProperty Name="Subcontractors" Relationship="Self.FK__ProjectSu__Subco__540C7B00" FromRole="ProjectSubcontractors" ToRole="Subcontractors" />
+  </EntityType>
+  <EntityType Name="QualityControl">
+    <Key>
+      <PropertyRef Name="QCID" />
+    </Key>
+    <Property Name="QCID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StageID" Type="Int32" Nullable="false" />
+    <Property Name="InspectionDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Inspector" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Result" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Notes" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ProjectStages" Relationship="Self.FK__QualityCo__Stage__4E53A1AA" FromRole="QualityControl" ToRole="ProjectStages" />
+  </EntityType>
+  <EntityType Name="Reports">
+    <Key>
+      <PropertyRef Name="ReportID" />
+    </Key>
+    <Property Name="ReportID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrderID" Type="Int32" Nullable="false" />
+    <Property Name="ReportType" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SubmissionDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Amount" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK__Reports__OrderID__489AC854" FromRole="Reports" ToRole="Orders" />
+  </EntityType>
+  <EntityType Name="Subcontractors">
+    <Key>
+      <PropertyRef Name="SubcontractorID" />
+    </Key>
+    <Property Name="SubcontractorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SubcontractorName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ContactInfo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Specialty" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="ProjectSubcontractors" Relationship="Self.FK__ProjectSu__Subco__540C7B00" FromRole="Subcontractors" ToRole="ProjectSubcontractors" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Taxes">
+    <Key>
+      <PropertyRef Name="TaxID" />
+    </Key>
+    <Property Name="TaxID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrderID" Type="Int32" Nullable="false" />
+    <Property Name="TaxType" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TaxRate" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+    <Property Name="TaxAmount" Type="Decimal" Precision="15" Scale="2" Nullable="false" />
+    <Property Name="PaymentDate" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK__Taxes__OrderID__56E8E7AB" FromRole="Taxes" ToRole="Orders" />
+  </EntityType>
+  <Association Name="FK__OrderServ__Servi__45BE5BA9">
+    <End Role="AdditionalServices" Type="Self.AdditionalServices" Multiplicity="1" />
+    <End Role="OrderServices" Type="Self.OrderServices" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AdditionalServices">
+        <PropertyRef Name="ServiceID" />
+      </Principal>
+      <Dependent Role="OrderServices">
+        <PropertyRef Name="ServiceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Orders__ClientID__367C1819">
+    <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+    <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clients">
+        <PropertyRef Name="ClientID" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="ClientID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Employees__Login__339FAB6E">
+    <End Role="Logins" Type="Self.Logins" Multiplicity="1" />
+    <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Logins">
+        <PropertyRef Name="LoginID" />
+      </Principal>
+      <Dependent Role="Employees">
+        <PropertyRef Name="LoginID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Orders__Employee__37703C52">
+    <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+    <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employees">
+        <PropertyRef Name="EmployeesID" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="EmployeesID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Equipment__Equip__5BAD9CC8">
+    <End Role="Equipment" Type="Self.Equipment" Multiplicity="1" />
+    <End Role="EquipmentUsage" Type="Self.EquipmentUsage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Equipment">
+        <PropertyRef Name="EquipmentID" />
+      </Principal>
+      <Dependent Role="EquipmentUsage">
+        <PropertyRef Name="EquipmentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EquipmentUsage_Orders">
+    <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+    <End Role="EquipmentUsage" Type="Self.EquipmentUsage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="EquipmentUsage">
+        <PropertyRef Name="OrdersID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Invoices__OrderI__4B7734FF">
+    <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+    <End Role="Invoices" Type="Self.Invoices" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="Invoices">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__MaterialD__Mater__40058253">
+    <End Role="Materials" Type="Self.Materials" Multiplicity="1" />
+    <End Role="MaterialDeliveries" Type="Self.MaterialDeliveries" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Materials">
+        <PropertyRef Name="MaterialID" />
+      </Principal>
+      <Dependent Role="MaterialDeliveries">
+        <PropertyRef Name="MaterialID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__MaterialD__Order__3F115E1A">
+    <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+    <End Role="MaterialDeliveries" Type="Self.MaterialDeliveries" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="MaterialDeliveries">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderServ__Order__44CA3770">
+    <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+    <End Role="OrderServices" Type="Self.OrderServices" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="OrderServices">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ProjectSt__Order__3A4CA8FD">
+    <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+    <End Role="ProjectStages" Type="Self.ProjectStages" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="ProjectStages">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Reports__OrderID__489AC854">
+    <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+    <End Role="Reports" Type="Self.Reports" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="Reports">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Taxes__OrderID__56E8E7AB">
+    <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+    <End Role="Taxes" Type="Self.Taxes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="Taxes">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ProjectSu__Stage__531856C7">
+    <End Role="ProjectStages" Type="Self.ProjectStages" Multiplicity="1" />
+    <End Role="ProjectSubcontractors" Type="Self.ProjectSubcontractors" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProjectStages">
+        <PropertyRef Name="StageID" />
+      </Principal>
+      <Dependent Role="ProjectSubcontractors">
+        <PropertyRef Name="StageID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__QualityCo__Stage__4E53A1AA">
+    <End Role="ProjectStages" Type="Self.ProjectStages" Multiplicity="1" />
+    <End Role="QualityControl" Type="Self.QualityControl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProjectStages">
+        <PropertyRef Name="StageID" />
+      </Principal>
+      <Dependent Role="QualityControl">
+        <PropertyRef Name="StageID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ProjectSu__Subco__540C7B00">
+    <End Role="Subcontractors" Type="Self.Subcontractors" Multiplicity="1" />
+    <End Role="ProjectSubcontractors" Type="Self.ProjectSubcontractors" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subcontractors">
+        <PropertyRef Name="SubcontractorID" />
+      </Principal>
+      <Dependent Role="ProjectSubcontractors">
+        <PropertyRef Name="SubcontractorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="construction_organizationEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AdditionalServices" EntityType="Self.AdditionalServices" />
+    <EntitySet Name="Clients" EntityType="Self.Clients" />
+    <EntitySet Name="Employees" EntityType="Self.Employees" />
+    <EntitySet Name="Equipment" EntityType="Self.Equipment" />
+    <EntitySet Name="EquipmentUsage" EntityType="Self.EquipmentUsage" />
+    <EntitySet Name="Invoices" EntityType="Self.Invoices" />
+    <EntitySet Name="Logins" EntityType="Self.Logins" />
+    <EntitySet Name="MaterialDeliveries" EntityType="Self.MaterialDeliveries" />
+    <EntitySet Name="Materials" EntityType="Self.Materials" />
+    <EntitySet Name="Orders" EntityType="Self.Orders" />
+    <EntitySet Name="OrderServices" EntityType="Self.OrderServices" />
+    <EntitySet Name="ProjectStages" EntityType="Self.ProjectStages" />
+    <EntitySet Name="ProjectSubcontractors" EntityType="Self.ProjectSubcontractors" />
+    <EntitySet Name="QualityControl" EntityType="Self.QualityControl" />
+    <EntitySet Name="Reports" EntityType="Self.Reports" />
+    <EntitySet Name="Subcontractors" EntityType="Self.Subcontractors" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="Taxes" EntityType="Self.Taxes" />
+    <AssociationSet Name="FK__OrderServ__Servi__45BE5BA9" Association="Self.FK__OrderServ__Servi__45BE5BA9">
+      <End Role="AdditionalServices" EntitySet="AdditionalServices" />
+      <End Role="OrderServices" EntitySet="OrderServices" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Orders__ClientID__367C1819" Association="Self.FK__Orders__ClientID__367C1819">
+      <End Role="Clients" EntitySet="Clients" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Employees__Login__339FAB6E" Association="Self.FK__Employees__Login__339FAB6E">
+      <End Role="Logins" EntitySet="Logins" />
+      <End Role="Employees" EntitySet="Employees" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Orders__Employee__37703C52" Association="Self.FK__Orders__Employee__37703C52">
+      <End Role="Employees" EntitySet="Employees" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Equipment__Equip__5BAD9CC8" Association="Self.FK__Equipment__Equip__5BAD9CC8">
+      <End Role="Equipment" EntitySet="Equipment" />
+      <End Role="EquipmentUsage" EntitySet="EquipmentUsage" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EquipmentUsage_Orders" Association="Self.FK_EquipmentUsage_Orders">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="EquipmentUsage" EntitySet="EquipmentUsage" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Invoices__OrderI__4B7734FF" Association="Self.FK__Invoices__OrderI__4B7734FF">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="Invoices" EntitySet="Invoices" />
+    </AssociationSet>
+    <AssociationSet Name="FK__MaterialD__Mater__40058253" Association="Self.FK__MaterialD__Mater__40058253">
+      <End Role="Materials" EntitySet="Materials" />
+      <End Role="MaterialDeliveries" EntitySet="MaterialDeliveries" />
+    </AssociationSet>
+    <AssociationSet Name="FK__MaterialD__Order__3F115E1A" Association="Self.FK__MaterialD__Order__3F115E1A">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="MaterialDeliveries" EntitySet="MaterialDeliveries" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderServ__Order__44CA3770" Association="Self.FK__OrderServ__Order__44CA3770">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="OrderServices" EntitySet="OrderServices" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ProjectSt__Order__3A4CA8FD" Association="Self.FK__ProjectSt__Order__3A4CA8FD">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="ProjectStages" EntitySet="ProjectStages" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Reports__OrderID__489AC854" Association="Self.FK__Reports__OrderID__489AC854">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="Reports" EntitySet="Reports" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Taxes__OrderID__56E8E7AB" Association="Self.FK__Taxes__OrderID__56E8E7AB">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="Taxes" EntitySet="Taxes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ProjectSu__Stage__531856C7" Association="Self.FK__ProjectSu__Stage__531856C7">
+      <End Role="ProjectStages" EntitySet="ProjectStages" />
+      <End Role="ProjectSubcontractors" EntitySet="ProjectSubcontractors" />
+    </AssociationSet>
+    <AssociationSet Name="FK__QualityCo__Stage__4E53A1AA" Association="Self.FK__QualityCo__Stage__4E53A1AA">
+      <End Role="ProjectStages" EntitySet="ProjectStages" />
+      <End Role="QualityControl" EntitySet="QualityControl" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ProjectSu__Subco__540C7B00" Association="Self.FK__ProjectSu__Subco__540C7B00">
+      <End Role="Subcontractors" EntitySet="Subcontractors" />
+      <End Role="ProjectSubcontractors" EntitySet="ProjectSubcontractors" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
